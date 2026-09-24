@@ -4,7 +4,7 @@ from app.tts.tts import synthesize_speech
 from app.utils.audio import play_audio
 
 
-def run_voice_pipeline(audio_path: str, output_path: str):
+def run_voice_pipeline(audio_path: str, output_path: str, conversation_history: list):
     print("\n[1/4] Converting speech to text...")
 
     user_text = transcribe_audio(audio_path)
@@ -12,8 +12,22 @@ def run_voice_pipeline(audio_path: str, output_path: str):
 
     print("\n[2/4] Generating AI response...")
 
-    response_text = generate_response(user_text)
+    response_text = generate_response(
+        user_text,
+        conversation_history
+    )
     print(f"AI: {response_text}")
+
+    # Save conversation for the next turn
+    conversation_history.append({
+        "role": "user",
+        "text": user_text
+    })
+
+    conversation_history.append({
+        "role": "assistant",
+        "text": response_text
+    })
 
     print("\n[3/4] Converting AI response to speech...")
 
@@ -29,4 +43,5 @@ def run_voice_pipeline(audio_path: str, output_path: str):
         "user_text": user_text,
         "response_text": response_text,
         "audio_path": output_path,
+        "conversation_history": conversation_history,
     }
