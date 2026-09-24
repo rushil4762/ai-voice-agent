@@ -1,8 +1,8 @@
 from app.tts.tts import synthesize_speech
 
-text = "નમસ્તે! આજે તમે કેમ છો? હું તમારી મદદ કરવા માટે અહીં છું."
+text = "હા, જરૂર. હું તમારી એપોઇન્ટમેન્ટ બુક કરવામાં તમારી મદદ કરીશ. કૃપા કરીને જણાવો કે તમે કયા દિવસે અને કેટલા વાગ્યે એપોઇન્ટમેન્ટ લેવા માંગો છો?"
 
-output_path = "data/audio/tts_output.wav"
+output_path = "data/audio/appointment_response.wav"
 
 synthesize_speech(text, output_path)
 
